@@ -1,6 +1,8 @@
-<h1>Add a recipe to <%=@category.name%></h1>
-<%= simple_form_for [@category, @bookmark] do |f|%>
-  <%= f.input :comment %>
-  <%= f.association :recipe %>
-  <%= f.submit%>
-<% end %>
+<div class="form-new mt-4">
+  <h3>Add a recipe to <%= @category.name %></h3>
+  <%= simple_form_for [@category, @bookmark] do |f|%>
+    <%= f.input :comment, label: false, placeholder: 'Your comment here...' %>
+    <%= f.association :recipe %>
+    <%= f.submit 'Add recipe', class: 'btn btn-warning' %>
+  <% end %>
+</div>
