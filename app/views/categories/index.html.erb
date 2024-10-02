@@ -13,16 +13,26 @@
 
   <div class="cards mt-3">
     <% @categories.each do |category| %>
-
-      <%= link_to category_path(category) do %>
-        <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(https://images.unsplash.com/photo-1569718212165-3a8278d5f624?q=80&w=1780&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)">
-          <div>
-            <h2><%= category.name %></h2>
-            <p><%= category.recipes.count %> recipes</p>
+      <% if category.photo.attached? %>
+        <%= link_to category_path(category) do %>
+          <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('<%= cl_image_path category.photo.key, crop: :fill %>')">
+            <div>
+              <h2><%= category.name %></h2>
+              <p><%= category.recipes.count %> recipes</p>
+              </div>
             </div>
-          </div>
         <% end %>
-
+      <% else %>
+        <%= link_to category_path(category) do %>
+            <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('<%= image_path "banner.jpg" %>')">
+              <div>
+                <h2><%= category.name %></h2>
+                <p><%= category.recipes.count %> recipes</p>
+                </div>
+              </div>
+          <% end %>
       <% end %>
+
+    <% end %>
   </div>
 </div>
